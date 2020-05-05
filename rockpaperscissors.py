@@ -12,22 +12,41 @@ p-r=2 and p1==p, p1 wins
 s-r=4, p2 wins
 s-p=2, and p1==s, p1 wins
 '''
+
+import random
+import sys
 d={'r':0,'p':2,'s':4}
+c=[0,2,4]
 
 def loop():
+    random.shuffle(c)
     a=int(d[input('player 1: ')])
-    b=int(d[input('player 2: ')])
+    b=int(c[0])
+    if b==0:
+        print('computer: r')
+    elif b==2:
+        print('computer: p')
+    elif b==4:
+        print('computer: s')
+        
     if a-b==0:
         print('draw\n')
     elif a-b==4 or a-b==-2 and a<4:
-        print('player 2 wins\n')
+        print('computer wins\n')
     else:
         print('player 1 wins\n')
     loop()
 
 def r0():
+    random.shuffle(c)
     a=int(d[input('player 1: ')])
-    b=int(d[input('player 2: ')])
+    b=int(c[0])
+    if b==0:
+        print('computer: r')
+    elif b==2:
+        print('computer: p')
+    elif b==4:
+        print('computer: s')
     if a-b==0:
         r0()
     elif a-b==4 or (a-b==-2 and a<4):
@@ -36,34 +55,74 @@ def r0():
         r1()
 
 def r1():
+    random.shuffle(c)
     a=int(d[input('player 1: ')])
-    b=int(d[input('player 2: ')])
+    b=int(c[0])
+    if b==0:
+        print('computer: r')
+    elif b==2:
+        print('computer: p')
+    elif b==4:
+        print('computer: s')
+        
     if a-b==0:
-        r0()
+        r1()
     elif a-b==4 or (a-b==-2 and a<4):
         r3()
     else:
-        print('player 1 wins!')
+        r=input('player 1 wins!\nplay again? (y/n) ')
+        if r=='y':
+            r0()
+        else:
+            sys.exit()
 
 def r2():
+    random.shuffle(c)
     a=int(d[input('player 1: ')])
-    b=int(d[input('player 2: ')])
+    b=int(c[0])
+    if b==0:
+        print('computer: r')
+    elif b==2:
+        print('computer: p')
+    elif b==4:
+        print('computer: s')
+        
     if a-b==0:
         r2()
     elif a-b==4 or (a-b==-2 and a<4):
-        print('player 2 wins!')
+        r=input('computer wins!\nplay again? (y/n) ')
+        if r=='y':
+            r0()
+        else:
+            sys.exit()
     else:
         r3()
         
 def r3():
+    random.shuffle(c)
     a=int(d[input('player 1: ')])
-    b=int(d[input('player 2: ')])
+    b=int(c[0])
+    if b==0:
+        print('computer: r')
+    elif b==2:
+        print('computer: p')
+    elif b==4:
+        print('computer: s')
+        
     if a-b==0:
         r3()
     elif a-b==4 or (a-b==-2 and a<4):
-        print('player 2 wins!')
+        r=input('computer wins!\nplay again? (y/n) ')
+        if r=='y':
+            r0()
+        else:
+            sys.exit()
     else:
-        print('player 1 wins!')
+        r=input('player 1 wins!\nplay again? (y/n) ')
+        if r=='y':
+            r0()
+        else:
+            sys.exit()
 
 s=input('welcome to the rock-paper-scissors game\n'
         'instructions: enter "r" for rock, "p" for paper, and "s" for scissors\n\n'
@@ -75,3 +134,4 @@ elif s=='2':
     r0()
 else:
     print('invalid entry, run script again')
+
