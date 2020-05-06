@@ -17,11 +17,14 @@ import random
 import sys
 d={'r':0,'p':2,'s':4}
 c=[0,2,4]
+cscor=0 #computer score
+pscor=0 #player score
 
 def loop():
     random.shuffle(c)
     a=int(d[input('player 1: ')])
     b=int(c[0])
+    global cscor,pscor
     if b==0:
         print('computer: r')
     elif b==2:
@@ -32,9 +35,13 @@ def loop():
     if a-b==0:
         print('draw\n')
     elif a-b==4 or a-b==-2 and a<4:
-        print('computer wins\n')
+        print('computer wins\ncomputer:',cscor+1,
+        '\nplayer 1:',pscor,'\n')
+        cscor=cscor+1
     else:
-        print('player 1 wins\n')
+        print('player 1 wins\ncomputer:',cscor,
+        '\nplayer 1:',pscor+1,'\n')
+        pscor=pscor+1
     loop()
 
 def r0():
