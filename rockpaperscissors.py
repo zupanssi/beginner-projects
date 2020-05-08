@@ -1,144 +1,83 @@
-#rock paper scissors
-'''
-STUDY
-p1/p2
-#r-r=0, draw
-#r-p=-2 and p1==r, p2 wins
-r-s=-4, p1 wins
-#p-p=0, draw
-p-r=2 and p1==p, p1 wins
-#p-s=-2 and p1==p, p2 wins
-#s-s=0, draw
-s-r=4, p2 wins
-s-p=2, and p1==s, p1 wins
-'''
+# rock paper scissors
 
 import random
 import sys
-d={'r':0,'p':2,'s':4}
-c=[0,2,4]
-cscor=0 #computer score
-pscor=0 #player score
 
-def loop():
-    random.shuffle(c)
-    a=int(d[input('player 1: ')])
-    b=int(c[0])
-    global cscor,pscor
-    if b==0:
-        print('computer: r')
-    elif b==2:
-        print('computer: p')
-    elif b==4:
-        print('computer: s')
-        
-    if a-b==0:
-        print('draw\n')
-    elif a-b==4 or a-b==-2 and a<4:
-        print('computer wins\ncomputer:',cscor+1,
-        '\nplayer 1:',pscor,'\n')
-        cscor=cscor+1
-    else:
-        print('player 1 wins\ncomputer:',cscor,
-        '\nplayer 1:',pscor+1,'\n')
-        pscor=pscor+1
-    loop()
+hand = ["r", "p", "s"]
+cscore, pscore = 0, 0
 
-def r0():
-    random.shuffle(c)
-    a=int(d[input('player 1: ')])
-    b=int(c[0])
-    if b==0:
-        print('computer: r')
-    elif b==2:
-        print('computer: p')
-    elif b==4:
-        print('computer: s')
-    if a-b==0:
-        r0()
-    elif a-b==4 or (a-b==-2 and a<4):
-        r2()
-    else:
-        r1()
 
-def r1():
-    random.shuffle(c)
-    a=int(d[input('player 1: ')])
-    b=int(c[0])
-    if b==0:
-        print('computer: r')
-    elif b==2:
-        print('computer: p')
-    elif b==4:
-        print('computer: s')
-        
-    if a-b==0:
-        r1()
-    elif a-b==4 or (a-b==-2 and a<4):
-        r3()
+def calculate_winner(player, computer):
+    if player == computer:
+        return "draw"
+    elif (
+        (computer == "r" and player == "s")
+        or (computer == "p" and player == "r")
+        or (computer == "s" and player == "p")
+    ):
+        return "computer"
     else:
-        r=input('player 1 wins!\nplay again? (y/n) ')
-        if r=='y':
-            r0()
+        return "player"
+
+
+def eternity():
+    global cscore, pscore
+    p1_choice = input("player 1: ")
+    comp_choice = random.choice(hand)
+    print("computer:", comp_choice)
+
+    winner = calculate_winner(p1_choice, comp_choice)
+
+    if winner == "draw":
+        print("\ndraw.\n")
+    elif winner == "computer":
+        cscore = cscore + 1
+        print("\ncomputer wins.\n")
+    else:
+        pscore = pscore + 1
+        print("\nplayer 1 wins.\n")
+
+    print("computer:", cscore, "\nplayer 1:", pscore, "\n")
+
+    eternity()
+
+
+def bestof3(pscore, cscore):
+    p1_choice = input("player 1: ")
+    comp_choice = random.choice(hand)
+    print("computer:", comp_choice)
+
+    winner = calculate_winner(p1_choice, comp_choice)
+
+    if winner == "draw":
+        pass
+    elif winner == "computer":
+        cscore = cscore + 1
+    else:
+        pscore = pscore + 1
+
+    if cscore == 2 or pscore == 2:
+        if cscore == 2:
+            print("\ncomputer wins!")
+        else:
+            print("\nplayer 1 wins!")
+
+        if input("wanna play again? (y/n) ") == "y":
+            bestof3(0, 0)
         else:
             sys.exit()
+    bestof3(pscore, cscore)
 
-def r2():
-    random.shuffle(c)
-    a=int(d[input('player 1: ')])
-    b=int(c[0])
-    if b==0:
-        print('computer: r')
-    elif b==2:
-        print('computer: p')
-    elif b==4:
-        print('computer: s')
-        
-    if a-b==0:
-        r2()
-    elif a-b==4 or (a-b==-2 and a<4):
-        r=input('computer wins!\nplay again? (y/n) ')
-        if r=='y':
-            r0()
-        else:
-            sys.exit()
-    else:
-        r3()
-        
-def r3():
-    random.shuffle(c)
-    a=int(d[input('player 1: ')])
-    b=int(c[0])
-    if b==0:
-        print('computer: r')
-    elif b==2:
-        print('computer: p')
-    elif b==4:
-        print('computer: s')
-        
-    if a-b==0:
-        r3()
-    elif a-b==4 or (a-b==-2 and a<4):
-        r=input('computer wins!\nplay again? (y/n) ')
-        if r=='y':
-            r0()
-        else:
-            sys.exit()
-    else:
-        r=input('player 1 wins!\nplay again? (y/n) ')
-        if r=='y':
-            r0()
-        else:
-            sys.exit()
 
-s=input('welcome to the rock-paper-scissors game\n'
-        'instructions: enter "r" for rock, "p" for paper, and "s" for scissors\n\n'
-        'for eternity game, type -> 1\nfor best of 3, type -> 2\n')
+game_mode = input(
+    "welcome to the rock-paper-scissors game\n"
+    'instructions: enter "r" for rock, "p" for paper, and "s" for scissors\n\n'
+    "for eternity game, type -> 1\nfor best of 3, type -> 2\n"
+)
 
-if s=='1':
-    loop()
-elif s=='2':
-    r0()
+if game_mode == "1":
+    eternity()
+elif game_mode == "2":
+    bestof3(0, 0)
 else:
-    print('invalid entry, run script again')
-
+    print("invalid entry, run script again")
