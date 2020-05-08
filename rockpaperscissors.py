@@ -54,15 +54,13 @@ def bestof3(pscor, cscor):
         cscor = cscor + 1
     else:
         pscor = pscor + 1
-    if cscor==2:
-        r = input("computer wins!\nplay again? (y/n) ")
-        if r == "y":
-            bestof3(0, 0)
+    if cscor==2 or pscor==2:
+        if cscor==2:
+            print('computer wins!')
         else:
-            sys.exit()
-    if pscor==2:
-        r = input("player 1 wins!\nplay again? (y/n) ")
-        if r == "y":
+            print('player 1 wins!')
+
+        if input('wanna play again? (y/n) ') == "y":
             bestof3(0, 0)
         else:
             sys.exit()
