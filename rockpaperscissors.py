@@ -20,7 +20,7 @@ def calculate_winner(player, computer):
         return "player"
 
 
-def loop():
+def eternity():
     global cscore, pscore
     p1_choice = input("player 1: ")
     comp_choice = random.choice(hand)
@@ -29,15 +29,17 @@ def loop():
     winner = calculate_winner(p1_choice, comp_choice)
 
     if winner == "draw":
-        print("draw\n")
+        print("\ndraw.\n")
     elif winner == "computer":
         cscore = cscore + 1
-        print("computer wins\ncomputer:", cscore, "\nplayer 1:", pscore, "\n")
+        print("\ncomputer wins.\n")
     else:
         pscore = pscore + 1
-        print("player 1 wins\ncomputer:", cscore, "\nplayer 1:", pscore, "\n")
+        print("\nplayer 1 wins.\n")
 
-    loop()
+    print("computer:", cscore, "\nplayer 1:", pscore, "\n")
+
+    eternity()
 
 
 def bestof3(pscore, cscore):
@@ -56,9 +58,9 @@ def bestof3(pscore, cscore):
 
     if cscore == 2 or pscore == 2:
         if cscore == 2:
-            print("computer wins!")
+            print("\ncomputer wins!")
         else:
-            print("player 1 wins!")
+            print("\nplayer 1 wins!")
 
         if input("wanna play again? (y/n) ") == "y":
             bestof3(0, 0)
@@ -74,7 +76,7 @@ game_mode = input(
 )
 
 if game_mode == "1":
-    loop()
+    eternity()
 elif game_mode == "2":
     bestof3(0, 0)
 else:
