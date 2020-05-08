@@ -46,69 +46,27 @@ def loop():
         print("player 1 wins\ncomputer:", cscor, "\nplayer 1:", pscor, "\n")
     loop()
 
-
-def r0():
-    p1_choice = int(d[input("player 1: ")])
+def bestof3(pscor, cscor):
+    p1_choice = d[input("player 1: ")]
     comp_choice = computer_chooses()
-    if p1_choice - comp_choice == 0:
-        r0()
-    elif p1_choice - comp_choice == 4 or (a - comp_choice == -2 and p1_choice < 4):
-        r2()
+
+    if p1_choice - comp_choice == 4 or p1_choice - comp_choice == -2 and p1_choice < 4:
+        cscor = cscor + 1
     else:
-        r1()
-
-
-def r1():
-    p1_choice = int(d[input("player 1: ")])
-    comp_choice = computer_chooses()
-
-    if p1_choice - comp_choice == 0:
-        r1()
-    elif p1_choice - comp_choice == 4 or (a - comp_choice == -2 and p1_choice < 4):
-        r3()
-    else:
-        r = input("player 1 wins!\nplay again? (y/n) ")
-        if r == "y":
-            r0()
-        else:
-            sys.exit()
-
-
-def r2():
-    p1_choice = int(d[input("player 1: ")])
-    comp_choice = computer_chooses()
-
-    if p1_choice - comp_choice == 0:
-        r2()
-    elif p1_choice - comp_choice == 4 or (a - comp_choice == -2 and p1_choice < 4):
+        pscor = pscor + 1
+    if cscor==2:
         r = input("computer wins!\nplay again? (y/n) ")
         if r == "y":
-            r0()
+            bestof3(0, 0)
         else:
             sys.exit()
-    else:
-        r3()
-
-
-def r3():
-    p1_choice = int(d[input("player 1: ")])
-    comp_choice = computer_chooses()
-
-    if p1_choice - comp_choice == 0:
-        r3()
-    elif p1_choice - comp_choice == 4 or (a - comp_choice == -2 and p1_choice < 4):
-        r = input("computer wins!\nplay again? (y/n) ")
-        if r == "y":
-            r0()
-        else:
-            sys.exit()
-    else:
+    if pscor==2:
         r = input("player 1 wins!\nplay again? (y/n) ")
         if r == "y":
-            r0()
+            bestof3(0, 0)
         else:
             sys.exit()
-
+    bestof3(pscor, cscor)
 
 s = input(
     "welcome to the rock-paper-scissors game\n"
@@ -119,6 +77,6 @@ s = input(
 if s == "1":
     loop()
 elif s == "2":
-    r0()
+    bestof3(0, 0)
 else:
     print("invalid entry, run script again")
