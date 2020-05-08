@@ -4,8 +4,6 @@ import random
 import sys
 
 hand = ["r", "p", "s"]
-cscore, pscore = 0, 0
-
 
 def calculate_winner(player, computer):
     if player == computer:
@@ -19,9 +17,7 @@ def calculate_winner(player, computer):
     else:
         return "player"
 
-
-def eternity():
-    global cscore, pscore
+def eternity(pscore = 0, cscore = 0):
     p1_choice = input("player 1: ")
     comp_choice = random.choice(hand)
     print("computer:", comp_choice)
@@ -39,10 +35,10 @@ def eternity():
 
     print("computer:", cscore, "\nplayer 1:", pscore, "\n")
 
-    eternity()
+    eternity(pscore, cscore)
 
 
-def bestof3(pscore, cscore):
+def bestof3(pscore = 0, cscore = 0):
     p1_choice = input("player 1: ")
     comp_choice = random.choice(hand)
     print("computer:", comp_choice)
@@ -63,7 +59,7 @@ def bestof3(pscore, cscore):
             print("\nplayer 1 wins!")
 
         if input("wanna play again? (y/n) ") == "y":
-            bestof3(0, 0)
+            bestof3()
         else:
             sys.exit()
     bestof3(pscore, cscore)
@@ -78,6 +74,6 @@ game_mode = input(
 if game_mode == "1":
     eternity()
 elif game_mode == "2":
-    bestof3(0, 0)
+    bestof3()
 else:
     print("invalid entry, run script again")
