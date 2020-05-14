@@ -27,10 +27,10 @@ def eternity(pscore = 0, cscore = 0):
     if winner == "draw":
         print("\ndraw.\n")
     elif winner == "computer":
-        cscore = cscore + 1
+        cscore += 1
         print("\ncomputer wins.\n")
     else:
-        pscore = pscore + 1
+        pscore += 1
         print("\nplayer 1 wins.\n")
 
     print("computer:", cscore, "\nplayer 1:", pscore, "\n")
@@ -48,9 +48,9 @@ def bestof3(pscore = 0, cscore = 0):
     if winner == "draw":
         pass
     elif winner == "computer":
-        cscore = cscore + 1
+        cscore += 1
     else:
-        pscore = pscore + 1
+        pscore += 1
 
     if cscore == 2 or pscore == 2:
         if cscore == 2:
